@@ -31,5 +31,21 @@ namespace EmployeePayrollServiceMSTest
             //Assert
             Assert.AreEqual(expected, actual);
         }
+
+        /// <summary>
+        /// UC12
+        /// Tests the remove employee.
+        /// </summary>
+        [TestMethod]
+        public void TestRemoveEmployee()
+        {
+            //Arrange
+            //Act
+            DBOperations.RemoveEmployee(1,1);
+            string actual = DBOperations.GetActiveStatus(1);
+            string expected = "F";
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
