@@ -7,6 +7,10 @@ namespace EmployeePayrollServiceMSTest
     [TestClass]
     public class TestDBOperations
     {
+        /// <summary>
+        /// UC11
+        /// Tests the add employee.
+        /// </summary>
         [TestMethod]
         public void TestAddEmployee()
         {
