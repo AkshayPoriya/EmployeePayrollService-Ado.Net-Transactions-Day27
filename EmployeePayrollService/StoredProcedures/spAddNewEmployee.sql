@@ -30,9 +30,9 @@ SET XACT_ABORT ON
 			VALUES
 			(@employee_id, @department_id);
 
-			INSERT INTO payroll(basic_pay,emp_id)
+			INSERT INTO payroll(basic_pay,emp_id,is_active)
 			VALUES
-			(@basic_pay,@employee_id);
+			(@basic_pay,@employee_id,'T');
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH

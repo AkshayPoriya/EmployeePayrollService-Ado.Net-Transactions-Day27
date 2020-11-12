@@ -82,5 +82,69 @@ namespace EmployeePayrollService
                 }
             }
         }
+
+        /// <summary>
+        /// UC12
+        /// Removes the employee.
+        /// </summary>
+        /// <param name="empId">The emp identifier.</param>
+        /// <param name="deptID">The dept identifier.</param>
+        /// <exception cref="Exception"></exception>
+        public static void RemoveEmployee(int empId, int deptID)
+        {
+            SqlConnection sqlConnection = DBConnection.GetConnection();
+            try
+            {
+                using (sqlConnection)
+                {
+                    sqlConnection.Open();
+                    SqlCommand sqlCommand = new SqlCommand("dbo.spRemoveEmployee", sqlConnection);
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.Parameters.AddWithValue("@employee_id", empId);
+                    sqlCommand.Parameters.AddWithValue("@dept_id", deptID);
+                    sqlCommand.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                if (sqlConnection.State == ConnectionState.Open)
+                {
+                    sqlConnection.Close();
+                }
+            }
+        }
+
+        public static string GetActiveStatus(int emp_id)
+        {
+            SqlConnection sqlConnection = DBConnection.GetConnection();
+            try
+            {
+                using (sqlConnection)
+                {
+                    sqlConnection.Open();
+                    string query = @"select p.is_active from dbo.payroll p 
+                                    where p.emp_id = @emp_id";
+                    SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@emp_id", emp_id);
+                    string isActive = (string)sqlCommand.ExecuteScalar();
+                    return isActive;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                if (sqlConnection.State == ConnectionState.Open)
+                {
+                    sqlConnection.Close();
+                }
+            }
+        }
     }
 }
