@@ -1,12 +1,15 @@
-﻿using System;
+using EmployeePayrollService;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
-namespace EmployeePayrollService
+namespace EmployeePayrollServiceMSTest
 {
-    class Program
+    [TestClass]
+    public class TestDBOperations
     {
-        static void Main(string[] args)
+        [TestMethod]
+        public void TestAddEmployee()
         {
-            Console.WriteLine("Welcome to Employee Payroll Service!");
             //Arrange
             Employee employee = new Employee();
             employee.employeeID = 7;
@@ -21,6 +24,8 @@ namespace EmployeePayrollService
             DBOperations.AddEmployee(employee);
             double actual = DBOperations.GetSalary("Kathy");
             double expected = 55000;
+            //Assert
+            Assert.AreEqual(expected, actual);
         }
     }
 }
