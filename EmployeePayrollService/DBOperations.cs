@@ -14,6 +14,12 @@ namespace EmployeePayrollService
 
     public class DBOperations
     {
+        /// <summary>
+        /// UC11
+        /// Adds the employee.
+        /// </summary>
+        /// <param name="employee">The employee.</param>
+        /// <exception cref="Exception"></exception>
         public static void AddEmployee(Employee employee)
         {
             SqlConnection sqlConnection = DBConnection.GetConnection();
